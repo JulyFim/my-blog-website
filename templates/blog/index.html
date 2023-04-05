@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block status_home %} active {% endblock status_home %}
+
+{% block content %}
+{% include 'search.html' %}
+<div class="row tm-row">
+    {% for post in posts %}
+    <article class="col-12 col-md-6 tm-post">
+        <hr class="tm-hr-primary">
+        <a href="post/{{ post.slug }}/" class="effect-lily tm-post-link tm-pt-60">
+            {% if post.image %}
+            <div class="tm-post-link-inner">
+                <img src="{{ post.image.url }}" alt="" class="img-fluid">
+            </div>
+            {% endif %}
+            <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ post.title }}</h2>
+        </a>
+        <p class="tm-pt-30">
+            {{ post.main_text|truncatewords:25 }}
+        </p>
+        <div class="d-flex justify-content-between tm-pt-45">
+            <span class="tm-color-primary">{{ post.created_on }}</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <span>{{ post.comment.count }} Comments</span>
+            <span>by <a href="{% url 'user_profile' post.author.username %}">{{ post.author }}</a></span>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+<div class="row tm-row tm-mt-100 tm-mb-75">
+    <div class="tm-prev-next-wrapper">
+    </div>
+    <div class="tm-paging-wrapper">
+        {% include 'paginator.html' %}
+    </div>
+</div>
+{% endblock content %}

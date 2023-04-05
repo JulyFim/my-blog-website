@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
+{%block title %} {{ post.title }} {% endblock title %}
+
+{% block content %}
+
+{% if post.image %}
+<hr class="tm-hr-primary tm-mb-55"/>
+<img
+        src="{{ post.image.url }}"
+        alt="website template image"
+        class="img-fluid"
+/>
+{% endif %}
+
+<div class="row tm-row">
+    <div class="col-lg-8 tm-post-col">
+        <div class="tm-post-full">
+            <div class="mb-4">
+                <h2 class="pt-2 tm-color-primary tm-post-title">{{ post.title }}</h2>
+                <p class="tm-mb-20 text-info">
+                    {% for tag in tags %} #{{ tag }} {% endfor %}
+                </p>
+                <p class="tm-mb-40">
+                    <u>{{ post.created_on }}</u> posted by <a href="{% url 'user_profile' post.author.username %}"><u>{{ post.author.username }}</u></a>
+                </p>
+                <p>{{ post.main_text }}</p>
+            </div>
+
+            <!-- Comments -->
+            <div>
+                <h2 class="tm-color-primary tm-post-title">
+                    {{ comments.count }} Comments
+                </h2>
+                <hr class="tm-hr-primary tm-mb-45"/>
+                {% for comment in comments %}
+                <div class="tm-comment tm-mb-45">
+                    <figure class="tm-comment-figure">
+                        <figcaption class="tm-color-primary text-center">
+                            <span class="tm-color-info">{{ comment.created_on }} by</span>
+                            <a href="{% url 'user_profile' comment.name %}">{{ comment.name }}</a>
+                        </figcaption>
+                    </figure>
+                    <div>
+                        <p>{{ comment.comment_text | linebreaks }}</p>
+                    </div>
+                </div>
+                {% endfor %} {% csrf_token %}
+                <form method="post" class="mb-5 tm-comment-form">
+                    {% csrf_token %} {{ comment_form|crispy }}
+                    <button type="submit" class="btn btn-info">Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% include 'side_bar.html' %}
+</div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% if page_obj.has_other_pages %}
+<nav class="tm-paging-nav d-inline-block">
+    <ul>
+        {% for page in paginator.page_range %}
+        {% if page_obj.number == page %}
+        <li class="tm-paging-item">{{ page }}</li>
+        {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+        <li class="tm-paging-item active">
+            <a href="?page={{ page }}" class="mb-2 tm-btn tm-paging-link">{{ page }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+{% endif %}

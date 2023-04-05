@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %}
+{% block title %} New Post {% endblock title %}
+
+{% block content %}
+<hr class="tm-hr-primary tm-mb-55">
+
+<div class="row tm-row">
+    <div class="col-lg-8 tm-post-col">
+        <div class="tm-post-full">
+            <!-- Create post form -->
+            <div>
+                <form method="POST" class="mb-5 tm-comment-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ post_form|crispy }}
+                    <button type="submit" class="btn btn-info">Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

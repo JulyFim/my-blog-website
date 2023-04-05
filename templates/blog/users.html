@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Users List {% endblock title %}
+
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users %}
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="tm-paging-wrapper">
+  {% include 'paginator.html' %}
+</div>
+{% endblock content %}
