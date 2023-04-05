@@ -10,18 +10,10 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
-@admin.register(models.Tag)
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-    list_filter = ('title',)
-    search_fields = ('title', 'slug')
-    prepopulated_fields = {'slug': ('title',)}
-
-
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'created_on', 'last_update')
-    list_filter = ('title', 'author', 'category', 'tag', 'created_on', 'last_update')
+    list_filter = ('title', 'author', 'category', 'created_on', 'last_update')
     search_fields = ('title', 'slug', 'author', 'main_text', 'category', 'tag')
     prepopulated_fields = {'slug': ('title',)}
 

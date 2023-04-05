@@ -16,14 +16,6 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
-class Tag(models.Model):
-    title = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=50, unique=True)
-
-    def __str__(self):
-        return self.title
-
-
 class Post(models.Model):
     title = models.CharField(max_length=60)
     slug = models.SlugField(max_length=100, unique=True)
@@ -38,10 +30,6 @@ class Post(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='post'
-    )
-    tag = models.ManyToManyField(
-        Tag,
         related_name='post'
     )
 

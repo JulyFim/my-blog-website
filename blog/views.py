@@ -59,10 +59,10 @@ class NewPostView(View):
         main_text = request.POST.get('main_text')
 
         category = get_object_or_404(models.Category, id=request.POST.get('category'))
-        tags = request.POST.get('tag')
+        request.POST.get('tag')
 
         image = request.FILES.get('image')
-        new_post = models.Post.objects.create(
+        models.Post.objects.create(
             title=title,
             slug=slugify(title),
             author=author,
@@ -70,7 +70,6 @@ class NewPostView(View):
             category=category,
             image=image,
         )
-        new_post.tag.set(tags)
         messages.success(request, 'Post successfully added.')
         return redirect('home')
 
@@ -92,10 +91,9 @@ class BlogDetail(View):
     @staticmethod
     def get(request, slug):
         post = get_object_or_404(models.Post, slug=slug)
-        tags = post.tag.all()
 
         post_category = get_object_or_404(models.Category, slug=post.category.slug)
-        related_posts = models.Post.objects.filter(category=post_category)[:3]
+        related_posts = models.Post.objects.filter(category=post_category).order_by('-id')[:3]
 
         comments = models.Comment.objects.filter(post=post).order_by('-id')[:6]
         categories = models.Category.objects.all()
@@ -104,7 +102,6 @@ class BlogDetail(View):
         return render(request, 'blog/post.html', {'post': post,
                                                   'comments': comments,
                                                   'categories': categories,
-                                                  'tags': tags,
                                                   'related_posts': related_posts,
                                                   'comment_form': comment_form
                                                   })

@@ -13,7 +13,7 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = models.Post
-        fields = ('title', 'main_text', 'category', 'tag', 'image')
+        fields = ('title', 'main_text', 'category', 'image')
 
 
 class NewUserForm(UserCreationForm):
