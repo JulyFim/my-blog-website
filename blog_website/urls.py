@@ -22,8 +22,8 @@ from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfir
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
     path('api/v1/', include('api.urls')),
+    path('', include('blog.urls')),
     # password reset
     path('password_reset/done/', PasswordResetDoneView.as_view(
         template_name='password/reset_done.html'
