@@ -19,6 +19,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from rest_framework import permissions
+from rest_framework.schemas import get_schema_view
+from drf_yasg.views import get_schema_view as drf_schema_view
+from drf_yasg import openapi
+
+schema_view = drf_schema_view(
+    openapi.Info(
+        title='Xtra Blog API',
+        default_version='v1',
+        terms_of_service='https://www.google.com/police/terms/',
+        contact=openapi.Contact(email='ahmedovbahtiar55@gmail.com'),
+        license=openapi.License(name='BSD License'),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,4 +56,14 @@ urlpatterns = [
     ),
          name='password_reset_complete'
          ),
+    # documentation
+    path('schema/', get_schema_view(
+        title='Plumbing-Gas-Installation API',
+        description='API Description',
+        version='1.0.0'
+    ),
+         name='openapi-schema'
+         ),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-doc'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc')
 ]

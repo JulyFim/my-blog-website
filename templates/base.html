@@ -49,7 +49,13 @@
             <ul>
                 <li class="tm-nav-item {% block status_home %}{% endblock status_home %}"><a href="/" class="tm-nav-link">
                     <i class="fas fa-home"></i>
-                    Blog Home
+                    Home
+                </a></li>
+                <li class="tm-nav-item {% block status_new_post %}{% endblock status_new_post %}"><a
+                        href="{% url 'new_post' %}"
+                        class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    New Post
                 </a></li>
                 <li class="tm-nav-item {% block status_about %}{% endblock status_about %}"><a href="{% url 'about' %}" class="tm-nav-link">
                     <i class="fas fa-users"></i>
