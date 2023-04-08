@@ -94,11 +94,11 @@ WSGI_APPLICATION = 'blog_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog_db',
-        'USER': 'blog_author',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': '6p2JK5bIzH29C4MzVa6X',
+        'HOST': 'containers-us-west-20.railway.app',
+        'PORT': '7581',
     }
 }
 
@@ -141,7 +141,7 @@ LOGIN_REDIRECT_URL = 'login'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Tashkent'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
